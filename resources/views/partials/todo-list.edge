@@ -1,0 +1,24 @@
+<div class="space-y-2">
+  @each(todo in todos)
+    <div 
+    id="todo-{{ todo.id }}" 
+    hx-put="/todos/complete/{{ todo.id }}"
+    hx-swap="outerHTML" 
+    hx-target="#todo-{{ todo.id }}"
+    class="flex items-center justify-between bg-white px-4 py-2 shadow rounded border-b-2">
+      <div 
+        class="{{ todo.completed ? 'line-through' : '' }}">
+        {{ todo.title }}
+      </div>
+        <button
+         hx-confirm="Are you sure?"
+         hx-swap="outerHTML"
+         hx-trigger="click"
+         hx-delete="/todos/{{ todo.id }}"  
+         hx-target="closest div"
+         class="bg-red-500 p-3 hover:bg-red-700">
+          X
+        </button>     
+    </div>
+  @endeach
+</div>
